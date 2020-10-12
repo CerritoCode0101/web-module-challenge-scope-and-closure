@@ -90,7 +90,9 @@ function finalScore(callback, num){
   }
   
   console.log(finalScore(inning, 9))
-/* Task 4: 
+/* 
+
+Task 4: 
 
 Create a function called `scoreboard` that accepts the following parameters: 
 
@@ -110,9 +112,24 @@ and returns the score at each pont in the game, like so:
 9th inning: awayTeam - homeTeam
 Final Score: awayTeam - homeTeam */
 
-
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function getInningScore(func){
+  let home = 0;
+  let away = 0;
+  return function returnScore(){
+    home += func();
+    away += func();
+    return `${away} - ${home}`
+  }
 }
 
 
+
+
+function scoreBoard(func1, func2, num) {
+let score = func1(func2)
+ for(let i = 0; i < num; i++){
+   console.log(score());
+ }
+}
+
+scoreBoard(getInningScore, inning, 9)
