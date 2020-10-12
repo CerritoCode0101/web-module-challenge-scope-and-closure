@@ -42,12 +42,15 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+
+Closure happens, when a function grabs a variable that has been written inside the global scope.
+Closure is also a way for functions/variables to store "memory"
+
 2. Study the following code, then answer the questions below.
 
 ```js
 function personalDice(name){
-  return function(){
-      // generate random number between 1 and 6
+  return function(){   
     const newRoll = Math.floor(Math.random() * 6);
     console.log(`${name} rolled a ${newRoll}`)
   }
@@ -63,8 +66,12 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+
+A.the closure is taking place between the 
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
 c. What is the lexical scope of `newRoll`? 
+A.newRoll is in the functional scope
 
 ### Task 2c - Exit Ticket
 

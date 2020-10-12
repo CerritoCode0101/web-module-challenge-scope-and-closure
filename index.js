@@ -27,11 +27,17 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
+ * counter one declares the variable inside the first function, this enables the count variable to change and store the date that has been changed.
+ * counter 2 declares in the global scope forcing the count back to 0 after every invocation
  * 
  * 2. Which of the two uses a closure? How can you tell?
+ * both of them use closure, counter one gets its count variable from outside its scope, and counter 2 gets its count variable from the global scope.
+ * counter 1 uses closure, it has a function counter nested within function countermaker.
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
- *
+ * 
+ *counter 1 would be preferable if you wanted to keep track of the count,(like adding score)
+ counter 2 would be better if you wanted the count to reset after every invocation (cant think of a use for this..)
 */
 
 // counter1 code
@@ -55,12 +61,11 @@ function counter2() {
 /* Task 2: inning() 
 
 Write a function called `inning` that returns a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
-
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
-}
+function inning(){
+  return Math.floor(Math.random()*3);
+  }
+  
+ 
 
 /* Task 3: finalScore()
 
@@ -76,13 +81,18 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(callback, num){
+  let score = {Home:0,Away:0}
+    for(let i = 0; i < num; i++){
+      score.Home += callback()
+      score.Away += callback()
+    }return score
+  }
+  
+  console.log(finalScore(inning, 9))
+/* 
 
-  /*Code Here*/
-
-}
-
-/* Task 4: 
+Task 4: 
 
 Create a function called `scoreboard` that accepts the following parameters: 
 
@@ -102,9 +112,24 @@ and returns the score at each pont in the game, like so:
 9th inning: awayTeam - homeTeam
 Final Score: awayTeam - homeTeam */
 
-
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function getInningScore(func){
+  let home = 0;
+  let away = 0;
+  return function returnScore(){
+    home += func();
+    away += func();
+    return `${away} - ${home}`
+  }
 }
 
 
+
+
+function scoreBoard(func1, func2, num) {
+let score = func1(func2)
+ for(let i = 0; i < num; i++){
+   console.log(score());
+ }
+}
+
+scoreBoard(getInningScore, inning, 9)
